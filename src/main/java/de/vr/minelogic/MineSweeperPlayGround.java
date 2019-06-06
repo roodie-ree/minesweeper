@@ -1,6 +1,6 @@
 package de.vr.minelogic;
 
-class MineSweeperPlayGround {
+public class MineSweeperPlayGround {
   public MineSweeperPlayGround (Integer height, Integer width) {
 
   }
