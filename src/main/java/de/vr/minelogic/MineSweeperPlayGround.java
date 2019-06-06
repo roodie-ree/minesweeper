@@ -1,17 +1,21 @@
 package de.vr.minelogic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class MineSweeperPlayGround {
   private Integer height;
   private Integer width;
+  private Integer bombs;
   private Boolean gameState = null;
-  private List<MineSweeperTile> tiles;
+  protected List<MineSweeperTile> tiles;
 
   public MineSweeperPlayGround() {
     height = 4;
     width = 4;
+    bombs = 3;
     tiles = Arrays.asList(
       new MineSweeperTile(), new MineSweeperTile(),
       new MineSweeperTile(), new MineSweeperTile().addBomb(),
@@ -28,6 +32,21 @@ public class MineSweeperPlayGround {
   public MineSweeperPlayGround(Integer height, Integer width, Integer bombs) {
     this.height = height;
     this.width = width;
+    this.bombs = bombs;
+    tiles = new ArrayList<MineSweeperTile>();
+    for (int i = 0; i < height * width; i += 1) {
+      tiles.add(new MineSweeperTile());
+    }
+    Random random = new Random();
+    while (bombs > 0) {
+      Integer bomb = random.nextInt(tiles.size());
+      MineSweeperTile tile = tiles.get(bomb);
+      if (!tile.isBomb()) {
+        tile.addBomb();
+        bombs -= 1;
+      }
+    }
+
     setBombCount();
   }
 
@@ -45,7 +64,7 @@ public class MineSweeperPlayGround {
     for (Integer x = xIndex - 1; x <= xIndex + 1; x +=1) {
       for (Integer y = yIndex - 1; y <= yIndex + 1 ; y += 1) {
         if (x < 0 || x >= width || y < 0 || y >= height) {
-          return;
+          continue;
         }
         MineSweeperTile tile = getTile(x, y);
         if (!tile.isBomb()) {
@@ -62,6 +81,10 @@ public class MineSweeperPlayGround {
     return width;
   }
 
+  public Integer getBombs() {
+    return bombs;
+  }
+
   public MineSweeperTile getTile(Integer x, Integer y) {
     return tiles.get(x + y * width);
   }
@@ -75,10 +98,10 @@ public class MineSweeperPlayGround {
       return;
     }
     tile.toggleHidden();
-    if (tile.getBombCount() == null) {
+    if (tile.isBomb()) {
       gameState = false;
-    }
-    if (tile.getBombCount() == 0) {
+
+    } else if (tile.getBombCount() == 0) {
       for (Integer xIndex = x - 1; xIndex <= x + 1; xIndex +=1) {
         for (Integer yIndex = y - 1; yIndex <= y + 1 ; yIndex += 1) {
           revealTile(xIndex, yIndex);
@@ -91,8 +114,18 @@ public class MineSweeperPlayGround {
     getTile(x, y).toggleFlaggedQuestion();
   }
 
+  private Long countOpenTiles() {
+    return tiles.stream()
+      .filter(tile -> !tile.isHidden())
+      .count();
+  }
+
   public Boolean gameEnd() {
     // true = won, false = lost, null = playing
+    Long openTiles = countOpenTiles();
+    if (bombs + openTiles == tiles.size()) {
+      gameState = true;
+    }
     return gameState;
   }
 }

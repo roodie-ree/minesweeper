@@ -55,7 +55,7 @@ public class MineSweeperPlayGroundTest {
     assertEquals(0, playGround.getTile(1, 3).getBombCount().intValue());
     assertEquals(2, playGround.getTile(2, 0).getBombCount().intValue());
     assertEquals(3, playGround.getTile(2, 1).getBombCount().intValue());
-    assertEquals(1, playGround.getTile(2, 2).getBombCount().intValue());
+    assertEquals(2, playGround.getTile(2, 2).getBombCount().intValue());
     assertEquals(1, playGround.getTile(2, 3).getBombCount().intValue());
     assertEquals(null, playGround.getTile(3, 0).getBombCount());
     assertEquals(2, playGround.getTile(3, 1).getBombCount().intValue());
@@ -106,9 +106,22 @@ public class MineSweeperPlayGroundTest {
     playGround.revealTile(0, 0);
     playGround.revealTile(0, 1);
     playGround.revealTile(1, 0);
+    playGround.revealTile(2, 0);
     playGround.revealTile(2, 1);
     playGround.revealTile(3, 1);
     playGround.revealTile(3, 3);
     assertTrue(playGround.gameEnd());
+  }
+
+  @Test
+  public void checkRandomPlayGround() {
+    playGround = new MineSweeperPlayGround(9, 7, 10);
+    assertEquals(9, playGround.getHeight().intValue());
+    assertEquals(7, playGround.getWidth().intValue());
+    assertEquals(9 * 7, playGround.tiles.size());
+    Long countBombs = playGround.tiles.stream()
+      .filter(tile -> tile.isBomb())
+      .count();
+    assertEquals(10, countBombs.longValue());
   }
 }
