@@ -10,5 +10,4 @@ public class MinesweeperApplication {
     // SpringApplication.run(MinesweeperApplication.class, args);
     System.out.println("Caaaaaarl, why did you kill all these people?");
   }
-
 }
