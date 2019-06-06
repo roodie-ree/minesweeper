@@ -14,5 +14,7 @@ public class MinesweeperApplication {
     System.out.println("Caaaaaarl, why did you kill all these people?");
     
     new MineSweeperWindow();
+    MainFrame newframe= new MainFrame();
+    newframe.init();
   }
 }

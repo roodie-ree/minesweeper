@@ -9,19 +9,19 @@ public class Buttons {
 	
 	
 	public Component createSmilyButton(){
-		JButton button = new JButton(new ImageIcon("C:icons8-gl�cklich-48.png"));
+		JButton button = new JButton(new ImageIcon("src/main/resources/icons8-glücklich-48.png"));
 	    button.setSize(500,500);
 	    return button;
 	}
 	
 	public Component createShockedButton(){
-		JButton button = new JButton(new ImageIcon("C:icons8-�berrascht-16.png"));
+		JButton button = new JButton(new ImageIcon("src/main/resources/icons8-überrascht-16.png"));
 	    button.setSize(500,500);
 	    return button;
 	}	
 	
 	public Component createDeadButton(){
-		JButton button = new JButton(new ImageIcon("C:icons8-gl�cklich-48.png"));
+		JButton button = new JButton(new ImageIcon("src/main/resources/icons8-glücklich-48.png"));
 	    button.setSize(500,500);
 	    return button;
 	}	
