@@ -8,12 +8,14 @@ import javax.swing.JPanel;
 
 public class GameOptionPanel extends JPanel {
 	Buttons buttons = new Buttons();
+	Zeit zeit = new Zeit();
 
 	public void init() {
 
 		Component buttonSmily = buttons.createSmilyButton();
 		Component buttonshocked = buttons.createShockedButton();
 		Component buttonDead = buttons.createDeadButton();
+		Component timeLabel = zeit.createTimeLabel();
 		// panel.add(buttonSmily);
 		// buttonSmily.setbounds();
 		// button.setPreferredSize(new Dimension(200, 100));
@@ -21,7 +23,7 @@ public class GameOptionPanel extends JPanel {
 		setLayout(experimentLayout);
 		add(buttonSmily, BorderLayout.LINE_START);
 		add(buttonshocked, BorderLayout.CENTER);
-		add(buttonDead, BorderLayout.PAGE_END);
+		add(timeLabel, BorderLayout.PAGE_END);
 
 	}
 }
