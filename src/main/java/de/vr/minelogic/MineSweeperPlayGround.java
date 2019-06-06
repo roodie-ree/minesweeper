@@ -9,6 +9,7 @@ public class MineSweeperPlayGround {
   private Integer height;
   private Integer width;
   private Integer bombs;
+  private int flags;
   private Boolean gameState = null;
   protected List<MineSweeperTile> tiles;
 
@@ -85,6 +86,10 @@ public class MineSweeperPlayGround {
     return bombs;
   }
 
+  public Integer getBombFlagCounter() {
+    return bombs - flags;
+  }
+
   public MineSweeperTile getTile(Integer x, Integer y) {
     return tiles.get(x + y * width);
   }
@@ -111,7 +116,13 @@ public class MineSweeperPlayGround {
   }
 
   public void flagTile(Integer x, Integer y) {
-    getTile(x, y).toggleFlaggedQuestion();
+    MineSweeperTile tile = getTile(x, y);
+    tile.toggleFlaggedQuestion();
+    if (tile.isFlagged()) {
+      flags += 1;
+    } else {
+      flags -= 1;
+    }
   }
 
   private Long countOpenTiles() {

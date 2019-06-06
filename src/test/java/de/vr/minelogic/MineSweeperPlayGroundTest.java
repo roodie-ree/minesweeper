@@ -82,6 +82,21 @@ public class MineSweeperPlayGroundTest {
   }
 
   @Test
+  public void checkFlagCounter() {
+    assertEquals(3, playGround.getBombFlagCounter().intValue());
+    playGround.flagTile(1, 1);
+    assertEquals(2, playGround.getBombFlagCounter().intValue());
+    playGround.flagTile(1, 0);
+    assertEquals(1, playGround.getBombFlagCounter().intValue());
+    playGround.flagTile(0, 1);
+    assertEquals(0, playGround.getBombFlagCounter().intValue());
+    playGround.flagTile(0, 0);
+    assertEquals(-1, playGround.getBombFlagCounter().intValue());
+    playGround.flagTile(0, 0);
+    assertEquals(0, playGround.getBombFlagCounter().intValue());
+  }
+
+  @Test
   public void checkRevealTile() {
     playGround.revealTile(0, 3);
     assertFalse(playGround.getTile(0, 2).isHidden());
