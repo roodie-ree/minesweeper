@@ -25,7 +25,7 @@ public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, 
 	private JButton[][] tileButtonArray;
 	
 	public MineSweeperPlayGroundMap(JFrame frame) {
-	    playgroundLogic = new MineSweeperPlayGround(9, 9);
+	    playgroundLogic = new MineSweeperPlayGround();
 		this.height = playgroundLogic.getHeight();
 		this.width = playgroundLogic.getWidth();
 		tileArray = new int[height][width];
