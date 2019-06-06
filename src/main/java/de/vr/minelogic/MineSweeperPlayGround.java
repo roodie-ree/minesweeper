@@ -1,14 +1,16 @@
 package de.vr.minelogic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class MineSweeperPlayGround {
   private Integer height;
   private Integer width;
   private Integer bombs;
   private Boolean gameState = null;
-  private List<MineSweeperTile> tiles;
+  protected List<MineSweeperTile> tiles;
 
   public MineSweeperPlayGround() {
     height = 4;
@@ -30,6 +32,21 @@ public class MineSweeperPlayGround {
   public MineSweeperPlayGround(Integer height, Integer width, Integer bombs) {
     this.height = height;
     this.width = width;
+    this.bombs = bombs;
+    tiles = new ArrayList<MineSweeperTile>();
+    for (int i = 0; i < height * width; i += 1) {
+      tiles.add(new MineSweeperTile());
+    }
+    Random random = new Random();
+    while (bombs > 0) {
+      Integer bomb = random.nextInt(tiles.size());
+      MineSweeperTile tile = tiles.get(bomb);
+      if (!tile.isBomb()) {
+        tile.addBomb();
+        bombs -= 1;
+      }
+    }
+
     setBombCount();
   }
 
