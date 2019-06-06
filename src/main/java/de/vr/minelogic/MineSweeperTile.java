@@ -1,6 +1,6 @@
 package de.vr.minelogic;
 
-class MineSweeperTile {
+public class MineSweeperTile {
   private Boolean hidden = true;
   private Boolean bomb = false;
   private Boolean flagged = false;
