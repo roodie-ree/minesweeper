@@ -28,25 +28,24 @@ public class Zeit {
 	    return label;
 	}
 	
-	//Methode zum starten des Timers, muss noch mit zugehöriger action eingebunden werden
 	public void zeitLaeuft() {
-
 		Zeit.timer = new Timer(1000, new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 				if (mineSweeperPlayGround.gameEnd() == null) {
 					Zeit.counterValue++;
-
 					Zeit.label.setText(String.valueOf(counterValue));
-				} else {
-					Zeit.timer.stop();
-				}
+				} 
 				if (Zeit.counterValue == 999) {
 					Zeit.timer.stop();
 				}
 			}
 		});
-
 		timer.start();
+	}
+	
+	public void zeitStoppen() {
+		Zeit.timer.stop();
+		Zeit.counterValue = 0;
+		Zeit.label.setText(String.valueOf(counterValue));
 	}
 }
