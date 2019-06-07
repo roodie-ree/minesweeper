@@ -34,11 +34,14 @@ public class Zeit {
 		Zeit.timer = new Timer(1000, new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				Zeit.counterValue++;
+				if (mineSweeperPlayGround.gameEnd() == null) {
+					Zeit.counterValue++;
 
-				Zeit.label.setText(String.valueOf(counterValue));
-
-				if (Zeit.counterValue == 999 || mineSweeperPlayGround.getGameState() == true || mineSweeperPlayGround.getGameState() == false) {
+					Zeit.label.setText(String.valueOf(counterValue));
+				} else {
+					Zeit.timer.stop();
+				}
+				if (Zeit.counterValue == 999) {
 					Zeit.timer.stop();
 				}
 			}
