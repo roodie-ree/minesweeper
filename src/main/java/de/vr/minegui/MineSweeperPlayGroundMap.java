@@ -20,7 +20,7 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	private ImageIcon flagIcon = new ImageIcon("src/main/resources/flag.svg");
 	private ImageIcon redMineIcon = new ImageIcon("src/main/resources/mine2.svg");
 	private ImageIcon greyMineIcon = new ImageIcon("src/main/resources/mine1.svg");
-	private ImageIcon greyMineIcon2 = new ImageIcon("src/main/resources/mine3.svg");
+	private ImageIcon greyMineRedXIcon = new ImageIcon("src/main/resources/mine3.svg");
 	
 	private JButton[][] tileButtonArray;
 	
@@ -35,9 +35,7 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 		this.width = playgroundLogic.getWidth();					
 		       
         setLayout(new GridLayout(height, width));
-        createPlayGround();
-        
-        
+        createPlayGround();        
 	}
 	
 	private void createPlayGround() {
@@ -73,8 +71,17 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	}
 	
 	public void flagTile(int x, int y) {
-		tileButtonArray[x][y].setIcon(flagIcon);
 		playgroundLogic.flagTile(x, y);
+		JButton button = tileButtonArray[x][y];
+		if(playgroundLogic.getTile(x, y).isFlagged()) {
+			button.setIcon(flagIcon);
+		} else if (playgroundLogic.getTile(x, y).isQuestion()) {
+			button.setIcon(null);
+			button.setText("?");
+		} else {
+			button.setIcon(null);
+			button.setText("");
+		}
 	}
 	
 	@Override
@@ -84,8 +91,6 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 			for (int j = 0; j < tileButtonArray[i].length; j++) {
 				if (source == tileButtonArray[i][j]) {
 					if (!tileButtonArray[i][j].isEnabled()){
-						Buttons.changeIconDead();
-						Zeit.timer.stop();
 						return;
 					}
 					else{
@@ -95,7 +100,10 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 							firstClick = true;
 						}
 						System.out.println("Left Button: " + i + ", " + j);
-						if (!playgroundLogic.getTile(i, j).isFlagged() || !playgroundLogic.getTile(i, j).isQuestion()) {
+						System.out.println(playgroundLogic.getTile(i, j).isFlagged());
+						if (playgroundLogic.getTile(i, j).isFlagged() || playgroundLogic.getTile(i, j).isQuestion()) {
+							return;
+						} else {							
 							revealTile(i, j);
 						}
 					}
@@ -113,12 +121,19 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	public void disableTiles(){
 		for (int i = 0; i < tileButtonArray.length; i++) {
 			for (int j = 0; j < tileButtonArray[i].length; j++) {		
-				if (playgroundLogic.getTile(i, j).isHidden()) {					
+				if (playgroundLogic.getTile(i, j).isBomb()) {					
+					if (playgroundLogic.getTile(i, j).isHidden()) {						
+						tileButtonArray[i][j].setIcon(redMineIcon);	
+					}
+				} 
+				if (playgroundLogic.getTile(i, j).isFlagged() || playgroundLogic.getTile(i, j).isQuestion()) {					
 					if (playgroundLogic.getTile(i, j).isBomb()) {						
 						tileButtonArray[i][j].setIcon(redMineIcon);	
-					}	
-					tileButtonArray[i][j].setEnabled(false);
-				} 
+					}
+					else {
+						tileButtonArray[i][j].setIcon(greyMineRedXIcon);
+					}
+				}
 				tileButtonArray[i][j].setEnabled(false);
 			}
 		}
