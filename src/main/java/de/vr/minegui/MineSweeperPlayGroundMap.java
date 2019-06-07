@@ -1,5 +1,6 @@
 package de.vr.minegui;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,59 +15,48 @@ import javax.swing.JPanel;
 import de.vr.minelogic.MineSweeperPlayGround;
 import de.vr.minelogic.MineSweeperTile;
 
-public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, MouseListener{
+public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	
 	private JPanel playgroundPanel;
 	private int height, width;
 	private MineSweeperPlayGround playgroundLogic;
-	private ImageIcon flagIcon = new ImageIcon("resources\\flag.svg");
+	private ImageIcon flagIcon = new ImageIcon("src/main/resources/flag.svg");	
 	
-	private int[][] tileArray;
 	private JButton[][] tileButtonArray;
 	
-	public MineSweeperPlayGroundMap(JFrame frame) {
+	public void init() {
 	    playgroundLogic = new MineSweeperPlayGround();
 		this.height = playgroundLogic.getHeight();
-		this.width = playgroundLogic.getWidth();
-		tileArray = new int[height][width];
-					
-		playgroundPanel = new JPanel();        
-        playgroundPanel.setLayout(new GridLayout(height, width));
-        
+		this.width = playgroundLogic.getWidth();					
+		       
+        setLayout(new GridLayout(height, width));
         createPlayGround();
- 
-        frame.add(playgroundPanel);
-    }
+	}
 	
 	private void createPlayGround() {
 		tileButtonArray = new JButton[height][width];
         // Tiles werden dem Panel hinzugefügt        
         for (int i = 0; i < height; i++) {        	
         	for (int j = 0; j < width; j++) {
-        		JButton tile = new JButton();
-//        		tile.addActionListener(this);
+        		JButton tile = new JButton();        		
         		tile.addMouseListener(this);
-        		playgroundPanel.add(tile);
+        		this.add(tile);
         		tileButtonArray[i][j] = tile;
         	}
         }               
 	}
 	
-	public void actionPerformed (ActionEvent event) {
-		Object source = event.getSource();
+	public void revealTile(int x, int y) {
+		tileButtonArray[x][y].setEnabled(false);
+		playgroundLogic.revealTile(x, y);
 		for (int i = 0; i < tileButtonArray.length; i++) {
 			for (int j = 0; j < tileButtonArray[i].length; j++) {
-				if (source == tileButtonArray[i][j]) {
-					System.out.println("Button: " + i + ", " + j);
+				if (!playgroundLogic.getTile(i, j).isHidden()) {
 					tileButtonArray[i][j].setEnabled(false);
-					checkTile(i, j);
+					playgroundLogic.revealTile(x, y);
 				}
 			}
 		}
-	}
-	
-	public void checkTile(int x, int y) {
-		MineSweeperTile tile = playgroundLogic.getTile(x, y);
 	}
 	
 	public void flagTile(int x, int y) {
@@ -82,12 +72,10 @@ public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, 
 				if (source == tileButtonArray[i][j]) {
 					if (event.getButton() == MouseEvent.BUTTON1) {
 						System.out.println("Left Button: " + i + ", " + j);
-						tileButtonArray[i][j].setEnabled(false);
-						checkTile(i, j);
+						revealTile(i, j);
 					}
 					if (event.getButton() == MouseEvent.BUTTON3) {
 						System.out.println("Right Button: " + i + ", " + j);
-						tileButtonArray[i][j].setEnabled(false);
 						tileButtonArray[i][j].setIcon(flagIcon);
 						flagTile(i, j);
 					}
