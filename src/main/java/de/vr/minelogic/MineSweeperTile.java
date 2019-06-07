@@ -66,6 +66,10 @@ public class MineSweeperTile extends JButton implements MouseListener {
     bombCount += 1;
   }
 
+  public void updateView() {
+
+  }
+
   @Override
   public String toString() {
     return "{" +
