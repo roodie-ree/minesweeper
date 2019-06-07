@@ -13,7 +13,7 @@ import de.vr.minelogic.MineSweeperTile;
 import de.vr.minesweeper.Buttons;
 import de.vr.minesweeper.Zeit;
 
-public class MineSweeperPlayGroundMap extends JPanel implements MouseListener {
+public class MineSweeperPlayGroundMap extends JPanel {
 
 	private JPanel playgroundPanel;
 	private int height, width;
@@ -37,11 +37,6 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener {
     setLayout(new GridLayout(height, width));
 	}
 
-	@Override
-	public void mouseClicked (MouseEvent event) {
-
-	}
-
 	public void gameOver(){
 		Buttons.changeIconDead();
 		Zeit.timer.stop();
@@ -50,26 +45,4 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener {
 		Buttons.changeIconWinner();
 		Zeit.timer.stop();
 	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		if(playground.gameEnd()==null){
-			Buttons.changeIconShocked();
-		}
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		if(playground.gameEnd()==null){
-			Buttons.changeIconSmily();
-		}
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-
-	@Override
-	public void mouseExited(MouseEvent e) {}
-
 }

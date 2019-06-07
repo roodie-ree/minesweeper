@@ -25,6 +25,7 @@ public class MineSweeperTile extends JButton implements MouseListener {
     this.x = x;
     this.y = y;
     this.playGround = playGround;
+    this.addMouseListener(this);
     updateView();
   }
 
@@ -86,16 +87,18 @@ public class MineSweeperTile extends JButton implements MouseListener {
 	  if(bomb && !hidden ){
 		  setIcon(greyMineIcon);
 		  setEnabled(false);
-	  }
-	  if(bombCount>=0 && !hidden){
-		  if (bombCount!=0){
-			  setText(Integer.toString(bombCount));
-			  setEnabled(false);
-		  }
-		  else {
-			  setEnabled(false);
-		  }
-	  }
+    }
+    if (bombCount != null) {
+      if(bombCount>=0 && !hidden){
+        if (bombCount!=0){
+          setText(Integer.toString(bombCount));
+          setEnabled(false);
+        }
+        else {
+          setEnabled(false);
+        }
+      }
+    }
 	  if (flagged && !hidden && bomb){
 		  setIcon(flagIcon);
 		  setEnabled(false);
@@ -103,7 +106,7 @@ public class MineSweeperTile extends JButton implements MouseListener {
 	  if (flagged && !hidden && !bomb){
 		  setIcon(greyMineRedXIcon);
 		  setEnabled(false);
-	  }	 
+	  }
   }
 
   public void disableOnEnd() {
@@ -123,12 +126,10 @@ public class MineSweeperTile extends JButton implements MouseListener {
 
   @Override
   public void mouseClicked(java.awt.event.MouseEvent e) {
-
   }
 
   @Override
   public void mousePressed(java.awt.event.MouseEvent e) {
-
   }
 
   @Override
@@ -142,12 +143,10 @@ public class MineSweeperTile extends JButton implements MouseListener {
 
   @Override
   public void mouseEntered(java.awt.event.MouseEvent e) {
-
   }
 
   @Override
   public void mouseExited(java.awt.event.MouseEvent e) {
-
   }
 
 }
