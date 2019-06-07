@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import de.vr.minegui.MineSweeperPlayGroundMap;
+
 public class MainFrame extends JFrame {
 
 	public void init() {
@@ -14,19 +16,15 @@ public class MainFrame extends JFrame {
 		
 		this.add(gameOptionPanel, BorderLayout.PAGE_START);
 		
+		MineSweeperPlayGroundMap playgroundmap = new MineSweeperPlayGroundMap();
 		
-		GamePanel game = new GamePanel();
-
-		game.init();
-
-		this.add(game,BorderLayout.CENTER);
-
+		playgroundmap.init();
 		
+		this.add(playgroundmap, BorderLayout.CENTER);		
 		
 		pack();
 		setSize(1000, 1000);
 		setVisible(true);
-
 	}
 
 }
