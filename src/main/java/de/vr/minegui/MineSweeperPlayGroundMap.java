@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import de.vr.minelogic.MineSweeperPlayGround;
+import de.vr.minesweeper.Buttons;
 import de.vr.minesweeper.Zeit;
 
 public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
@@ -98,10 +99,19 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {
+		Buttons.changeIconShocked();
+	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+		if(playgroundLogic.gameEnd()!=null){
+			if (!playgroundLogic.gameEnd()){
+				Buttons.changeIconDead();
+				}
+		}
+		else {Buttons.changeIconSmily();}
+	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {}
