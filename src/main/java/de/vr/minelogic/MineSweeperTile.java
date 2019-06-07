@@ -1,11 +1,25 @@
 package de.vr.minelogic;
 
-public class MineSweeperTile {
+import java.awt.event.MouseListener;
+
+import javax.swing.JButton;
+
+public class MineSweeperTile extends JButton implements MouseListener {
+  static final long serialVersionUID = 1;
   private Boolean hidden = true;
   private Boolean bomb = false;
   private Boolean flagged = false;
   private Boolean question = false;
   private Integer bombCount = 0;
+  private Integer x;
+  private Integer y;
+  private MineSweeperPlayGround playGround;
+
+  MineSweeperTile(Integer x, Integer y, MineSweeperPlayGround playGround) {
+    this.x = x;
+    this.y = y;
+    this.playGround = playGround;
+  }
 
   public Boolean isHidden() {
     return this.hidden;
@@ -61,6 +75,31 @@ public class MineSweeperTile {
       ", question='" + isQuestion() + "'" +
       ", bombCount='" + getBombCount() + "'" +
       "}";
+  }
+
+  @Override
+  public void mouseClicked(java.awt.event.MouseEvent e) {
+
+  }
+
+  @Override
+  public void mousePressed(java.awt.event.MouseEvent e) {
+
+  }
+
+  @Override
+  public void mouseReleased(java.awt.event.MouseEvent e) {
+
+  }
+
+  @Override
+  public void mouseEntered(java.awt.event.MouseEvent e) {
+
+  }
+
+  @Override
+  public void mouseExited(java.awt.event.MouseEvent e) {
+
   }
 
 }
