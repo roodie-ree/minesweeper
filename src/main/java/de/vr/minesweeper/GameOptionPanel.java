@@ -17,7 +17,7 @@ public class GameOptionPanel extends JPanel {
 		Component buttonshocked = buttons.createShockedButton();
 		Component buttonDead = buttons.createDeadButton();
 		Component timeLabel = zeit.createTimeLabel();
-		Component bomben= bombs.createBombCounter(10);
+		Component bomben= bombs.createBombCounter();
 		// panel.add(buttonSmily);
 		// buttonSmily.setbounds();
 		// button.setPreferredSize(new Dimension(200, 100));

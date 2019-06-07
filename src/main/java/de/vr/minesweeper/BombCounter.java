@@ -18,16 +18,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
+import de.vr.minelogic.MineSweeperTile;
+
 public class BombCounter extends JFrame {
 	public static JLabel label;
 	
-	public Component createBombCounter(int counterValue){
+	public Component createBombCounter(){
+		MineSweeperTile bombcount=new MineSweeperTile();
+		Integer bombamount = bombcount.getBombCount();
 		label = new JLabel();
 		label.setFont(label.getFont().deriveFont(64f));
 		label.setForeground(Color.red);
 		label.setOpaque(true);
 		label.setBackground(Color.black);
-		label.setText(String.valueOf(counterValue));
+		label.setText(String.valueOf(bombamount));
 	    return label;
 	}
 }

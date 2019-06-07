@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import de.vr.minelogic.MineSweeperPlayGround;
-import de.vr.minelogic.MineSweeperTile;
+import de.vr.minesweeper.Zeit;
 
 public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	
@@ -19,6 +19,8 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	private ImageIcon flagIcon = new ImageIcon("src/main/resources/flag.svg");	
 	
 	private JButton[][] tileButtonArray;
+	
+	Zeit zeit = new Zeit();
 	
 	public void init() {
 	    playgroundLogic = new MineSweeperPlayGround();
@@ -34,7 +36,8 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
         // Tiles werden dem Panel hinzugefügt        
         for (int i = 0; i < height; i++) {        	
         	for (int j = 0; j < width; j++) {
-        		JButton tile = new JButton();        		
+        		JButton tile = new JButton();
+        		tile.setFont(tile.getFont().deriveFont(64f));
         		tile.addMouseListener(this);
         		this.add(tile);
         		tileButtonArray[i][j] = tile;
@@ -45,12 +48,19 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	public void revealTile(int x, int y) {
 		tileButtonArray[x][y].setEnabled(false);
 		playgroundLogic.revealTile(x, y);
+		
 		for (int i = 0; i < tileButtonArray.length; i++) {
 			for (int j = 0; j < tileButtonArray[i].length; j++) {
 				if (!playgroundLogic.getTile(i, j).isHidden()) {
 					tileButtonArray[i][j].setEnabled(false);
-					playgroundLogic.revealTile(x, y);
-				}
+					if (playgroundLogic.getTile(i, j).isBomb()) {
+						tileButtonArray[i][j].setIcon(flagIcon);
+					}
+					else {
+						tileButtonArray[i][j].setText(playgroundLogic.getTile(i, j).getBombCount().toString());
+					}
+				} 
+
 			}
 		}
 	}
@@ -68,6 +78,8 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 				if (source == tileButtonArray[i][j]) {
 					if (event.getButton() == MouseEvent.BUTTON1) {
 						System.out.println("Left Button: " + i + ", " + j);
+//						zeit.zeitLaeuft();
+						tileButtonArray[i][j].setEnabled(false);
 						revealTile(i, j);
 					}
 					if (event.getButton() == MouseEvent.BUTTON3) {
