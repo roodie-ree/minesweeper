@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import de.vr.minegui.MineSweeperPlayGroundMap;
+
 public class MineSweeperPlayGround {
   private Integer height;
   private Integer width;
@@ -35,8 +37,11 @@ public class MineSweeperPlayGround {
     this.width = width;
     this.bombs = bombs;
     tiles = new ArrayList<MineSweeperTile>();
-    for (int i = 0; i < height * width; i += 1) {
-      tiles.add(new MineSweeperTile());
+    for (int x = 0; x < width; x += 1) {
+    	for (int y = 0; y < height; y += 1) {
+    		tiles.add(new MineSweeperTile(x, y, this));
+    	}
+      
     }
     Random random = new Random();
     while (bombs > 0) {

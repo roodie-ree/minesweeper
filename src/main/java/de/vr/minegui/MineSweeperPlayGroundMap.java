@@ -30,7 +30,7 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	Zeit zeit = new Zeit();
 	
 	public void init() {
-	    playgroundLogic = new MineSweeperPlayGround();
+	    playgroundLogic = new MineSweeperPlayGround(5, 5, 1);
 		this.height = playgroundLogic.getHeight();
 		this.width = playgroundLogic.getWidth();					
 		       
