@@ -121,7 +121,6 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 				} 
 				tileButtonArray[i][j].setEnabled(false);
 			}
-
 		}
 	}
 	
