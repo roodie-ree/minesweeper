@@ -25,6 +25,7 @@ public class MineSweeperTile extends JButton implements MouseListener {
     this.x = x;
     this.y = y;
     this.playGround = playGround;
+    updateView();
   }
 
   public Boolean isHidden() {
@@ -85,6 +86,10 @@ public class MineSweeperTile extends JButton implements MouseListener {
 	  if(bomb){
 		  setIcon(redMineIcon);
 	  }
+  }
+
+  public void disableOnEnd() {
+    updateView();
   }
 
   @Override

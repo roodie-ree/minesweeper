@@ -49,7 +49,7 @@ public class MineSweeperPlayGround {
     	for (int y = 0; y < height; y += 1) {
     		tiles.add(new MineSweeperTile(x, y, this));
     	}
-      
+
     }
     Random random = new Random();
     while (bombs > 0) {
@@ -86,6 +86,10 @@ public class MineSweeperPlayGround {
         }
       }
     }
+  }
+
+  public List<MineSweeperTile> getTiles() {
+    return tiles;
   }
 
   public Integer getHeight() {
@@ -127,6 +131,7 @@ public class MineSweeperPlayGround {
         }
       }
     }
+    gameEnd();
   }
 
   public void flagTile(Integer x, Integer y) {
@@ -151,6 +156,11 @@ public class MineSweeperPlayGround {
     Long openTiles = countOpenTiles();
     if (bombs + openTiles == tiles.size()) {
       gameState = true;
+    }
+    if (gameState != null) {
+      for (MineSweeperTile tile : tiles) {
+        tile.disableOnEnd();
+      }
     }
     return gameState;
   }
