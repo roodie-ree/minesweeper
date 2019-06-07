@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import de.vr.minelogic.MineSweeperPlayGround;
 import de.vr.minelogic.MineSweeperTile;
+import de.vr.minesweeper.Buttons;
 import de.vr.minesweeper.Zeit;
 
 public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, MouseListener{
@@ -84,10 +85,12 @@ public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, 
 			for (int j = 0; j < tileButtonArray[i].length; j++) {
 				if (source == tileButtonArray[i][j]) {
 					if (event.getButton() == MouseEvent.BUTTON1) {
+						mousePressed(event);
 						System.out.println("Left Button: " + i + ", " + j);
 						zeit.zeitLaeuft();
 						tileButtonArray[i][j].setEnabled(false);
 						checkTile(i, j);
+						mouseReleased(event);
 					}
 					if (event.getButton() == MouseEvent.BUTTON3) {
 						System.out.println("Right Button: " + i + ", " + j);
@@ -101,10 +104,16 @@ public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {
+		Buttons button = new Buttons();
+		button.createShockedButton();
+	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+		Buttons button = new Buttons();
+		button.createSmilyButton();
+	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {}
