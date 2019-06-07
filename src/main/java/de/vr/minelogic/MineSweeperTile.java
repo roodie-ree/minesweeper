@@ -19,7 +19,7 @@ public class MineSweeperTile extends JButton implements MouseListener {
 	private ImageIcon flagIcon = new ImageIcon("src/main/resources/flag.svg");
 	private ImageIcon redMineIcon = new ImageIcon("src/main/resources/mine2.svg");
 	private ImageIcon greyMineIcon = new ImageIcon("src/main/resources/mine1.svg");
-	private ImageIcon greyMineIcon2 = new ImageIcon("src/main/resources/mine3.svg");
+	private ImageIcon greyMineRedXIcon = new ImageIcon("src/main/resources/mine3.svg");
 
   MineSweeperTile(Integer x, Integer y, MineSweeperPlayGround playGround) {
     this.x = x;
@@ -82,9 +82,27 @@ public class MineSweeperTile extends JButton implements MouseListener {
 	  if(!(question && flagged)){
 		  setIcon(null);
 	  }
-	  if(bomb){
-		  setIcon(redMineIcon);
+	  if(bomb && !hidden ){
+		  setIcon(greyMineIcon);
+		  setEnabled(false);
 	  }
+	  if(bombCount>=0 && !hidden){
+		  if (bombCount!=0){
+			  setText(Integer.toString(bombCount));
+			  setEnabled(false);
+		  }
+		  else {
+			  setEnabled(false);
+		  }
+	  }
+	  if (flagged && !hidden && bomb){
+		  setIcon(flagIcon);
+		  setEnabled(false);
+	  }
+	  if (flagged && !hidden && !bomb){
+		  setIcon(greyMineRedXIcon);
+		  setEnabled(false);
+	  }	 
   }
 
   @Override
