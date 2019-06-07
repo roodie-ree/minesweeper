@@ -1,5 +1,6 @@
 package de.vr.minelogic;
 
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
@@ -109,7 +110,11 @@ public class MineSweeperTile extends JButton implements MouseListener {
 
   @Override
   public void mouseReleased(java.awt.event.MouseEvent e) {
-
+    if (MouseEvent.BUTTON1 == e.getButton()) {
+      playGround.revealTile(x, y);
+    } else if (MouseEvent.BUTTON3 == e.getButton()) {
+      playGround.flagTile(x, y);
+    }
   }
 
   @Override
