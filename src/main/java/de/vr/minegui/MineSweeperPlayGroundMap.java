@@ -85,12 +85,10 @@ public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, 
 			for (int j = 0; j < tileButtonArray[i].length; j++) {
 				if (source == tileButtonArray[i][j]) {
 					if (event.getButton() == MouseEvent.BUTTON1) {
-						mousePressed(event);
 						System.out.println("Left Button: " + i + ", " + j);
 						zeit.zeitLaeuft();
 						tileButtonArray[i][j].setEnabled(false);
 						checkTile(i, j);
-						mouseReleased(event);
 					}
 					if (event.getButton() == MouseEvent.BUTTON3) {
 						System.out.println("Right Button: " + i + ", " + j);
@@ -105,14 +103,17 @@ public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		Buttons button = new Buttons();
-		button.createShockedButton();
+		Buttons.changeIconShocked();
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		Buttons button = new Buttons();
-		button.createSmilyButton();
+		if(playgroundLogic.gameEnd()!=null){
+			if (!playgroundLogic.gameEnd()){
+				Buttons.changeIconDead();
+				}
+		}
+		else {Buttons.changeIconSmily();}
 	}
 
 	@Override
