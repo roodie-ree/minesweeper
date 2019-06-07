@@ -33,6 +33,8 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 		       
         setLayout(new GridLayout(height, width));
         createPlayGround();
+        
+        
 	}
 	
 	private void createPlayGround() {
@@ -59,6 +61,8 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 					tileButtonArray[i][j].setEnabled(false);
 					if (playgroundLogic.getTile(i, j).isBomb()) {
 						tileButtonArray[i][j].setIcon(flagIcon);
+						gameOver();
+						
 					}
 					else {
 						tileButtonArray[i][j].setText(playgroundLogic.getTile(i, j).getBombCount().toString());
@@ -99,6 +103,11 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 		}
 	}
 
+	public void gameOver(){
+		Buttons.changeIconDead();
+	}
+	
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		Buttons.changeIconShocked();
@@ -106,14 +115,9 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(playgroundLogic.gameEnd()!=null){
-			if (!playgroundLogic.gameEnd()){
-				Buttons.changeIconDead();
-				}
-		}
-		else {Buttons.changeIconSmily();}
+		Buttons.changeIconSmily();
 	}
-
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {}
 
