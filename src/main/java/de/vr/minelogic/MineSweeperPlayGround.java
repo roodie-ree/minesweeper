@@ -18,14 +18,22 @@ public class MineSweeperPlayGround {
     width = 4;
     bombs = 3;
     tiles = Arrays.asList(
-      new MineSweeperTile(), new MineSweeperTile(),
-      new MineSweeperTile(), new MineSweeperTile().addBomb(),
-      new MineSweeperTile(), new MineSweeperTile().addBomb(),
-      new MineSweeperTile(), new MineSweeperTile(),
-      new MineSweeperTile(), new MineSweeperTile(),
-      new MineSweeperTile(), new MineSweeperTile().addBomb(),
-      new MineSweeperTile(), new MineSweeperTile(),
-      new MineSweeperTile(), new MineSweeperTile()
+      new MineSweeperTile(0, 0, this),
+      new MineSweeperTile(0, 1, this),
+      new MineSweeperTile(0, 2, this),
+      new MineSweeperTile(0, 3, this).addBomb(),
+      new MineSweeperTile(1, 0, this),
+      new MineSweeperTile(1, 1, this).addBomb(),
+      new MineSweeperTile(1, 2, this),
+      new MineSweeperTile(1, 3, this),
+      new MineSweeperTile(2, 0, this),
+      new MineSweeperTile(2, 1, this),
+      new MineSweeperTile(2, 2, this),
+      new MineSweeperTile(2, 3, this).addBomb(),
+      new MineSweeperTile(3, 0, this),
+      new MineSweeperTile(3, 1, this),
+      new MineSweeperTile(3, 2, this),
+      new MineSweeperTile(3, 3, this)
     );
     setBombCount();
   }

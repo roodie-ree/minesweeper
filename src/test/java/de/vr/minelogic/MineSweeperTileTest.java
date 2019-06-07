@@ -13,7 +13,8 @@ public class MineSweeperTileTest {
 
   @Before
   public void beforeEach() {
-    tile = new MineSweeperTile();
+    MineSweeperPlayGround playGround = new MineSweeperPlayGround();
+    MineSweeperTile tile = playGround.getTile(0, 3);
   }
 
   @Test
