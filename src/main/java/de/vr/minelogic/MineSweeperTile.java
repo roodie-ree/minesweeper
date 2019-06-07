@@ -3,6 +3,7 @@ package de.vr.minelogic;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class MineSweeperTile extends JButton implements MouseListener {
@@ -15,6 +16,10 @@ public class MineSweeperTile extends JButton implements MouseListener {
   private Integer x;
   private Integer y;
   private MineSweeperPlayGround playGround;
+	private ImageIcon flagIcon = new ImageIcon("src/main/resources/flag.svg");
+	private ImageIcon redMineIcon = new ImageIcon("src/main/resources/mine2.svg");
+	private ImageIcon greyMineIcon = new ImageIcon("src/main/resources/mine1.svg");
+	private ImageIcon greyMineIcon2 = new ImageIcon("src/main/resources/mine3.svg");
 
   MineSweeperTile(Integer x, Integer y, MineSweeperPlayGround playGround) {
     this.x = x;
@@ -68,7 +73,18 @@ public class MineSweeperTile extends JButton implements MouseListener {
   }
 
   public void updateView() {
-
+	  if(flagged){
+		  setIcon(flagIcon);
+	  }
+	  if(question){
+		  setText("?");
+	  }
+	  if(!(question && flagged)){
+		  setIcon(null);
+	  }
+	  if(bomb){
+		  setIcon(redMineIcon);
+	  }
   }
 
   @Override
