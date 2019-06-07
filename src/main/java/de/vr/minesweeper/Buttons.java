@@ -9,8 +9,9 @@ import javax.swing.JButton;
 public class Buttons {
 	static JButton button;
 	private static ImageIcon shocked=new ImageIcon("src/main/resources/icons8-überrascht-16.png");
-	private static ImageIcon dead=new ImageIcon("src/main/resources/dead-emoticon-smile-icon-isolated-260nw-384153085.jpg");
+	private static ImageIcon dead=new ImageIcon("src/main/resources/dead.png");
 	private static ImageIcon smily=new ImageIcon("src/main/resources/icons8-glücklich-48.png");
+	private static ImageIcon winner=new ImageIcon("src/main/resources/cool.png");
 	
 	public Component createSmilyButton(){
 		button = new JButton(new ImageIcon("src/main/resources/icons8-glücklich-48.png"));
@@ -43,7 +44,9 @@ public class Buttons {
 		button.setIcon(smily);
 	}
 	
-	
+	public static void changeIconWinner (){
+		button.setIcon(winner);
+	}	
 	
 	public static void main(String[] args)
     {

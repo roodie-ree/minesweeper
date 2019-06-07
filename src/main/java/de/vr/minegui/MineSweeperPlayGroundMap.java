@@ -83,6 +83,12 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 		for (int i = 0; i < tileButtonArray.length; i++) {
 			for (int j = 0; j < tileButtonArray[i].length; j++) {
 				if (source == tileButtonArray[i][j]) {
+					if (!tileButtonArray[i][j].isEnabled()){
+						Buttons.changeIconDead();
+						Zeit.timer.stop();
+						return;
+					}
+					else{
 					if (event.getButton() == MouseEvent.BUTTON1) {
 						if (!firstClick) {
 							zeit.zeitLaeuft();
@@ -96,24 +102,52 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 						tileButtonArray[i][j].setIcon(flagIcon);
 						flagTile(i, j);
 					}
+					}
 				}
 			}
 		}
 	}
+	
+	public void disableTiles(){
+		for (int i = 0; i < tileButtonArray.length; i++) {
+			for (int j = 0; j < tileButtonArray[i].length; j++) {		
+				if (playgroundLogic.getTile(i, j).isHidden()) {					
+					if (playgroundLogic.getTile(i, j).isBomb()) {						
+						tileButtonArray[i][j].setIcon(redMineIcon);	
+					}	
+					tileButtonArray[i][j].setEnabled(false);
+				} 
+				tileButtonArray[i][j].setEnabled(false);
+			}
 
-	public void gameOver(){
-		Buttons.changeIconDead();
+		}
 	}
 	
+	public void gameOver(){
+		Buttons.changeIconDead();
+		disableTiles();
+		Zeit.timer.stop();
+	}
+	public void gameWon(){
+		Buttons.changeIconWinner();
+		disableTiles();
+		Zeit.timer.stop();
+	}	
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		Buttons.changeIconShocked();
+		if(playgroundLogic.gameEnd()==null){
+			Buttons.changeIconShocked();
+		}
+		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		Buttons.changeIconSmily();
+		if(playgroundLogic.gameEnd()==null){
+			Buttons.changeIconSmily();
+		}
+
 	}
 	
 	@Override
