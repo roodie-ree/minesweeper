@@ -16,7 +16,10 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	private JPanel playgroundPanel;
 	private int height, width;
 	private MineSweeperPlayGround playgroundLogic;
-	private ImageIcon flagIcon = new ImageIcon("src/main/resources/flag.svg");	
+	private ImageIcon flagIcon = new ImageIcon("src/main/resources/flag.svg");
+	private ImageIcon redMineIcon = new ImageIcon("src/main/resources/mine2.svg");
+	private ImageIcon greyMineIcon = new ImageIcon("src/main/resources/mine1.svg");
+	private ImageIcon greyMineIcon2 = new ImageIcon("src/main/resources/mine3.svg");
 	
 	private JButton[][] tileButtonArray;
 	
@@ -48,22 +51,19 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
         }               
 	}
 	
-	public void revealTile(int x, int y) {
-		tileButtonArray[x][y].setEnabled(false);
-		playgroundLogic.revealTile(x, y);
-		
+	public void revealTile(int x, int y) {		
+		playgroundLogic.revealTile(x, y);		
 		for (int i = 0; i < tileButtonArray.length; i++) {
 			for (int j = 0; j < tileButtonArray[i].length; j++) {
-				if (!playgroundLogic.getTile(i, j).isHidden()) {
-					tileButtonArray[i][j].setEnabled(false);
+				if (!playgroundLogic.getTile(i, j).isHidden()) {					
 					if (playgroundLogic.getTile(i, j).isBomb()) {
-						tileButtonArray[i][j].setIcon(flagIcon);
+						tileButtonArray[i][j].setIcon(redMineIcon);						
 					}
 					else {
 						tileButtonArray[i][j].setText(playgroundLogic.getTile(i, j).getBombCount().toString());
+						tileButtonArray[i][j].setEnabled(false);
 					}
 				} 
-
 			}
 		}
 	}
@@ -84,8 +84,7 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 							zeit.zeitLaeuft();
 							firstClick = true;
 						}
-						System.out.println("Left Button: " + i + ", " + j);
-						tileButtonArray[i][j].setEnabled(false);
+						System.out.println("Left Button: " + i + ", " + j);						
 						revealTile(i, j);
 					}
 					if (event.getButton() == MouseEvent.BUTTON3) {
