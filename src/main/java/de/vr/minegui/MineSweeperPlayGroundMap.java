@@ -25,6 +25,9 @@ public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, 
 	private int[][] tileArray;
 	private JButton[][] tileButtonArray;
 	
+	// damit der Timer Start nur beim ersten linken Mausclick ausgelöst wird
+	private boolean firstClick = false;
+	
 	Zeit zeit = new Zeit();
 	
 	public MineSweeperPlayGroundMap(JFrame frame) {
@@ -85,9 +88,12 @@ public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, 
 				if (source == tileButtonArray[i][j]) {
 					if (event.getButton() == MouseEvent.BUTTON1) {
 						System.out.println("Left Button: " + i + ", " + j);
-						zeit.zeitLaeuft();
 						tileButtonArray[i][j].setEnabled(false);
 						checkTile(i, j);
+						if (!firstClick) {
+							zeit.zeitLaeuft();
+							firstClick = true;
+						}
 					}
 					if (event.getButton() == MouseEvent.BUTTON3) {
 						System.out.println("Right Button: " + i + ", " + j);

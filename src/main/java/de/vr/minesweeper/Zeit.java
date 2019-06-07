@@ -25,7 +25,7 @@ public class Zeit {
 	}
 	
 	//Methode zum starten des Timers, muss noch mit zugehöriger action eingebunden werden
-	void zeitLaeuft() {
+	public void zeitLaeuft() {
 
 		Zeit.timer = new Timer(1000, new ActionListener() {
 
