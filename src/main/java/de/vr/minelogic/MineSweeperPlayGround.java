@@ -111,6 +111,7 @@ public class MineSweeperPlayGround {
       return;
     }
     tile.toggleHidden();
+    tile.updateView();
     if (tile.isBomb()) {
       gameState = false;
 
@@ -131,6 +132,7 @@ public class MineSweeperPlayGround {
     } else {
       flags -= 1;
     }
+    tile.updateView();
   }
 
   private Long countOpenTiles() {
