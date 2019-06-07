@@ -94,8 +94,10 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 							zeit.zeitLaeuft();
 							firstClick = true;
 						}
-						System.out.println("Left Button: " + i + ", " + j);						
-						revealTile(i, j);
+						System.out.println("Left Button: " + i + ", " + j);
+						if (!playgroundLogic.getTile(i, j).isFlagged() || !playgroundLogic.getTile(i, j).isQuestion()) {
+							revealTile(i, j);
+						}
 					}
 					if (event.getButton() == MouseEvent.BUTTON3) {
 						System.out.println("Right Button: " + i + ", " + j);
@@ -119,7 +121,6 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 				} 
 				tileButtonArray[i][j].setEnabled(false);
 			}
-
 		}
 	}
 	
