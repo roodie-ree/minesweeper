@@ -8,8 +8,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-public class Zeit {
+import de.vr.minelogic.MineSweeperPlayGround;
 
+public class Zeit {
+	
+	MineSweeperPlayGround mineSweeperPlayGround = new MineSweeperPlayGround();
+	
 	public static int counterValue = 0;
 	public static Timer timer;
 	public static JLabel label;
@@ -25,7 +29,7 @@ public class Zeit {
 	}
 	
 	//Methode zum starten des Timers, muss noch mit zugehöriger action eingebunden werden
-	void zeitLaeuft() {
+	public void zeitLaeuft() {
 
 		Zeit.timer = new Timer(1000, new ActionListener() {
 
@@ -34,7 +38,7 @@ public class Zeit {
 
 				Zeit.label.setText(String.valueOf(counterValue));
 
-				if (Zeit.counterValue == 999) {
+				if (Zeit.counterValue == 999 || mineSweeperPlayGround.getGameState() == true || mineSweeperPlayGround.getGameState() == false) {
 					Zeit.timer.stop();
 				}
 			}

@@ -20,6 +20,9 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 	
 	private JButton[][] tileButtonArray;
 	
+	// damit der Timer Start nur beim ersten linken Mausclick ausgelöst wird
+	private boolean firstClick = false;
+	
 	Zeit zeit = new Zeit();
 	
 	public void init() {
@@ -77,8 +80,11 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 			for (int j = 0; j < tileButtonArray[i].length; j++) {
 				if (source == tileButtonArray[i][j]) {
 					if (event.getButton() == MouseEvent.BUTTON1) {
+						if (!firstClick) {
+							zeit.zeitLaeuft();
+							firstClick = true;
+						}
 						System.out.println("Left Button: " + i + ", " + j);
-//						zeit.zeitLaeuft();
 						tileButtonArray[i][j].setEnabled(false);
 						revealTile(i, j);
 					}
