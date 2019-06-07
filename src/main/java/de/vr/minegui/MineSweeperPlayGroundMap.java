@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import de.vr.minelogic.MineSweeperPlayGround;
 import de.vr.minelogic.MineSweeperTile;
+import de.vr.minesweeper.Zeit;
 
 public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, MouseListener{
 	
@@ -23,6 +24,8 @@ public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, 
 	
 	private int[][] tileArray;
 	private JButton[][] tileButtonArray;
+	
+	Zeit zeit = new Zeit();
 	
 	public MineSweeperPlayGroundMap(JFrame frame) {
 	    playgroundLogic = new MineSweeperPlayGround();
@@ -82,6 +85,7 @@ public class MineSweeperPlayGroundMap extends JFrame implements ActionListener, 
 				if (source == tileButtonArray[i][j]) {
 					if (event.getButton() == MouseEvent.BUTTON1) {
 						System.out.println("Left Button: " + i + ", " + j);
+						zeit.zeitLaeuft();
 						tileButtonArray[i][j].setEnabled(false);
 						checkTile(i, j);
 					}
