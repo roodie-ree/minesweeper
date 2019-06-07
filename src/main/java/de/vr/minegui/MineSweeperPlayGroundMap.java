@@ -84,9 +84,14 @@ public class MineSweeperPlayGroundMap extends JPanel implements MouseListener{
 			for (int j = 0; j < tileButtonArray[i].length; j++) {
 				if (source == tileButtonArray[i][j]) {
 					if (!tileButtonArray[i][j].isEnabled()){
+						if(!playgroundLogic.gameEnd()){
 						Buttons.changeIconDead();
 						Zeit.timer.stop();
-						return;
+						return;}
+						else {
+							Buttons.changeIconWinner();
+							Zeit.timer.stop();
+						}
 					}
 					else{
 					if (event.getButton() == MouseEvent.BUTTON1) {
